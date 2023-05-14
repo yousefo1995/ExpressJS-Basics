@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <img
+      src="http://localhost:3000/static/image.png"
+      alt="image"
+      style="width: 200px"
+    />
+    <ul id="todos-list"></ul>
+    <script>
+      const getData = async () => {
+        try {
+          const res = await fetch("http://localhost:3000/");
+          const data = await res.json();
+          const todo = data.data;
+          console.log(todo);
+          const todosList = document.getElementById("todos-list");
+          todo.forEach((todo) => {
+            const li = document.createElement("li");
+            li.textContent = todo.title;
+            todosList.appendChild(li);
+          });
+        } catch (error) {
+          console.log(error);
+        }
+      };
+      getData();
+    </script>
+  </body>
+</html>
